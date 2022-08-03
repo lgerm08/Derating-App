@@ -21,6 +21,8 @@ class InputJouleLossesViewController: UIViewController {
         return navBar
     }()
     
+    var i = 0.1
+    
     private lazy var r1: TextFieldComponent = {
         let textField = TextFieldComponent(label: "Resistência do Primário")
         return textField
