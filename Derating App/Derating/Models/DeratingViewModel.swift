@@ -17,7 +17,7 @@ class DeratingViewModel {
     }
     
     func getJouleLosses() -> JouleLosses {
-        return JouleLosses(zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: nil, jouleLosses: 1.0)
+        return JouleLosses(puJouleLosses: nil, zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: 1.0, siJouleLosses: nil)
     }
     
 }

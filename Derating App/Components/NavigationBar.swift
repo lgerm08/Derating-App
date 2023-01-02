@@ -24,7 +24,7 @@ class NavigationBar: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
+        label.textColor = UIColor().RGBColor(r: 50, g: 161, b: 230)
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.boldSystemFont(ofSize: 32)
@@ -53,7 +53,9 @@ class NavigationBar: UIView {
     // MARK: - Layout Configuration
 
     private func setupViewLayout() {
-        backgroundColor = UIColor().RGBColor(r: 35, g: 64, b: 110)
+        backgroundColor = .white
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.8
         addConstraints()
     }
     

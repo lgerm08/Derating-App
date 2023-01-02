@@ -10,7 +10,7 @@ import UIKit
 class EddyCurrentLossViewController: UIViewController {
     
     let viewModel = DeratingViewModel()
-    var jouleLosses = JouleLosses(zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: nil, jouleLosses: 1.0)
+    var jouleLosses = JouleLosses(puJouleLosses: nil, zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: 1.0, siJouleLosses: nil)
     
     private lazy var navbar: NavigationBar = {
         let navBar = NavigationBar(title: "Perdas por Correntes Parasitas")
@@ -20,46 +20,22 @@ class EddyCurrentLossViewController: UIViewController {
         return navBar
     }()
     
-    private lazy var provideEddyCurrentLosses: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = UIColor().RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("Informar perdas por correntes parasitas [pu]", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(eddyCurrentLossesInformed), for: .touchUpInside)
-        return button
+    private lazy var provideEddyCurrentLosses: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "Informar perdas por correntes parasitas [pu]")
+        buttonView.button.addTarget(self, action: #selector(eddyCurrentLossesInformed), for: .touchUpInside)
+        return buttonView
     }()
     
-    private lazy var estimateAs2Percent: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = UIColor().RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("Considerar 2% das perdas joulicas", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(estimateLossesAs2Percent), for: .touchUpInside)
-        return button
+    private lazy var estimateAs2Percent: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "Considerar 2% das perdas joulicas")
+        buttonView.button.addTarget(self, action: #selector(estimateLossesAs2Percent), for: .touchUpInside)
+        return buttonView
     }()
     
-    private lazy var estimateAs3Percent: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = UIColor().RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("Considerar 3% das perdas joulicas", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(estimateLossesAs3Percent), for: .touchUpInside)
-        return button
+    private lazy var estimateAs3Percent: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "Considerar 3% das perdas joulicas")
+        buttonView.button.addTarget(self, action: #selector(estimateLossesAs3Percent), for: .touchUpInside)
+        return buttonView
     }()
     
     override func viewDidLoad() {
@@ -80,10 +56,10 @@ class EddyCurrentLossViewController: UIViewController {
     }
     
     func goToInputJouleLosses(mode: String) {
-        let newViewController = InputJouleLossesViewController()
-        newViewController.modalPresentationStyle = .fullScreen
-        newViewController.selectedOption = mode
-        self.present(newViewController, animated: true, completion: nil)
+//        let newViewController = TestDataViewController()
+//        newViewController.modalPresentationStyle = .fullScreen
+//        newViewController.selectedOption = mode
+//        self.present(newViewController, animated: true, completion: nil)
     }
     
     @objc func goBackToPreviousScreen(sender: UITapGestureRecognizer) {
@@ -91,7 +67,7 @@ class EddyCurrentLossViewController: UIViewController {
     }
     
     func addSubviews() {
-        view.backgroundColor = UIColor().RGBColor(r: 45, g: 111, b: 158)
+        view.backgroundColor = .white
         view.addSubview(navbar)
         view.addSubview(provideEddyCurrentLosses)
         view.addSubview(estimateAs2Percent)

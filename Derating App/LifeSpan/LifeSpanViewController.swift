@@ -11,82 +11,49 @@ class LifeSpanViewController: UIViewController {
     
     let viewModel = LifeSpanViewModel()
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Estimativa de Vida Útil do Transformador"
-        label.font = UIFont.boldSystemFont(ofSize: 32)
-        label.textColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        return label
+    private lazy var navbar: NavigationBar = {
+       let navBar = NavigationBar(title: "Estimativa de Vida Útil do Transformador")
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.goBackToPreviousScreen))
+        gesture.cancelsTouchesInView = false
+        navBar.backSignImage.addGestureRecognizer(gesture)
+        return navBar
     }()
     
-    private lazy var PJ1TextField: TextFieldComponent = {
-        let textField = TextFieldComponent(label: "PJ1")
+    private lazy var PJ1TextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "PJ [W]"
         return textField
     }()
     
-    private lazy var temperatureTextField: TextFieldComponent = {
-        let textField = TextFieldComponent(label: "Temperatura Máxima do Enrolamento [K]")
+    private lazy var temperatureTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "Temperatura Máxima do Enrolamento [K]"
         return textField
     }()
     
-    private lazy var NBR5416Button: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = UIColor().RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("NBR 5416", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(estimateWithNBR5416), for: .touchUpInside)
-        return button
+    private lazy var NBR5416Button: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "NBR 5416")
+        buttonView.button.addTarget(self, action: #selector(estimateWithNBR5416), for: .touchUpInside)
+        return buttonView
     }()
     
-    private lazy var ANSIC5791Button: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = UIColor().RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("ANSI C57.91", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(estimateWithANSIC5791), for: .touchUpInside)
-        return button
+    private lazy var ANSIC5791Button: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "ANSI C57.91")
+        buttonView.button.addTarget(self, action: #selector(estimateWithANSIC5791), for: .touchUpInside)
+        return buttonView
     }()
     
-    private lazy var PECOButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = UIColor().RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("PECO", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(estimateWithPECO), for: .touchUpInside)
-        return button
+    private lazy var PECOButton: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "PECO")
+        buttonView.button.addTarget(self, action: #selector(estimateWithPECO), for: .touchUpInside)
+        return buttonView
     }()
     
-    private lazy var MONTSINGERButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor().RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = UIColor().RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("MONTSINGER", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(estimateWithMontSinger), for: .touchUpInside)
-        button.isEnabled = false
-        return button
+    private lazy var MONTSINGERButton: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "MONTSINGER")
+        buttonView.button.addTarget(self, action: #selector(estimateWithMontSinger), for: .touchUpInside)
+        buttonView.button.isEnabled = false
+        return buttonView
     }()
     
     private lazy var estimatedLifeSpan: AnswerComponent = {
@@ -94,7 +61,7 @@ class LifeSpanViewController: UIViewController {
         answer.isHidden = true
         return answer
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
@@ -123,6 +90,10 @@ class LifeSpanViewController: UIViewController {
         }
     }
     
+    @objc func goBackToPreviousScreen(sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @objc func estimateWithMontSinger() {
 //        if let theta = asFloat(temperatureTextField) {
 //            viewModel.estimateWithMontSinger(tempeture: theta)
@@ -132,8 +103,8 @@ class LifeSpanViewController: UIViewController {
     }
     
     func addSubviews() {
-        view.backgroundColor = UIColor().RGBColor(r: 68, g: 127, b: 166)
-        view.addSubview(titleLabel)
+        view.backgroundColor = .white
+        view.addSubview(navbar)
         view.addSubview(temperatureTextField)
         view.addSubview(NBR5416Button)
         view.addSubview(ANSIC5791Button)
@@ -143,8 +114,8 @@ class LifeSpanViewController: UIViewController {
         addConstraints()
     }
     
-    func asFloat(_ textNumber: TextFieldComponent) -> Float? {
-        if let value = Float(textNumber.textField.text ?? "") {
+    func asFloat(_ textNumber: UITextField) -> Float? {
+        if let value = Float(textNumber.text ?? "") {
             return value
         } else {
             return nil
@@ -152,25 +123,25 @@ class LifeSpanViewController: UIViewController {
     }
     
     func addConstraints() {
-        titleLabel.anchor(
+        navbar.anchor(
             top: view.topAnchor,
             left: view.leftAnchor,
             right: view.rightAnchor,
-            topConstant: 60,
-            leftConstant: 30,
-            rightConstant: 30
+            heightConstant: 120
         )
         temperatureTextField.anchor(
-            top: titleLabel.bottomAnchor,
-            left: titleLabel.leftAnchor,
-            right: titleLabel.rightAnchor,
+            top: navbar.bottomAnchor,
+            left: view.leftAnchor,
+            right: view.rightAnchor,
             topConstant: 30,
+            leftConstant: 30,
+            rightConstant: 30,
             heightConstant: 65
         )
         NBR5416Button.anchor(
             top: temperatureTextField.bottomAnchor,
-            left: titleLabel.leftAnchor,
-            right: titleLabel.rightAnchor,
+            left: temperatureTextField.leftAnchor,
+            right: temperatureTextField.rightAnchor,
             topConstant: 40,
             heightConstant: 60
         )

@@ -5,41 +5,25 @@ class HomeViewController: UIViewController {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "TÏTULO"
+        label.text = "DERATING APP"
         label.font = UIFont.boldSystemFont(ofSize: 32)
-        label.textColor = RGBColor(r: 214, g: 164, b: 64)
+        label.textColor = UIColor().RGBColor(r: 50, g: 161, b: 230)
         label.numberOfLines = 0
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
-    private lazy var goToDeratingScreen: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("Calcular corrente de Derating", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(routeToDeratingScreen), for: .touchUpInside)
-        return button
+    private lazy var goToDeratingScreen: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "Calcular corrente de Derating")
+        buttonView.button.addTarget(self, action: #selector(routeToDeratingScreen), for: .touchUpInside)
+        return buttonView
     }()
     
-    private lazy var goToLifeSpanScreen: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.backgroundColor = RGBColor(r: 214, g: 164, b: 64)
-        button.tintColor = RGBColor(r: 245, g: 238, b: 184)
-        button.setTitle("Estimar Vida Útil", for: .normal)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowRadius = 2.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(routeToLifeSpanScreen), for: .touchUpInside)
-        return button
+    private lazy var goToLifeSpanScreen: ButtonComponent = {
+        let buttonView = ButtonComponent(title: "Estimar Vida Útil")
+        buttonView.button.addTarget(self, action: #selector(routeToLifeSpanScreen), for: .touchUpInside)
+        return buttonView
     }()
     
     override func viewDidLoad() {
@@ -60,7 +44,7 @@ class HomeViewController: UIViewController {
     }
     
     func addSubviews() {
-        view.backgroundColor = RGBColor(r: 68, g: 127, b: 166)
+        view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(goToDeratingScreen)
         view.addSubview(goToLifeSpanScreen)
@@ -91,10 +75,6 @@ class HomeViewController: UIViewController {
             topConstant: 50,
             heightConstant: 100
         )
-    }
-    
-    func RGBColor(r: Float, g: Float, b: Float) -> UIColor {
-        return UIColor(red: CGFloat(r/255.0), green: CGFloat(g/255.0), blue: CGFloat(b/255.0), alpha: 1.0)
     }
 }
 

@@ -36,4 +36,34 @@ extension UITextField {
             self.rightViewMode = .always
         }
     }
+    
+    func formatAsDecimal() {
+        var number: NSNumber
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 6
+        formatter.minimumFractionDigits = 6
+        
+        var amountWithPrefix = self.text ?? ""
+        
+        // remove from String: "$", ".", ","
+        let regex = try? NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive)
+        amountWithPrefix = regex?.stringByReplacingMatches(
+            in: amountWithPrefix,
+            options: NSRegularExpression.MatchingOptions(rawValue: 0),
+            range: NSRange(location: 0, length: self.text?.count ?? 0),
+            withTemplate: ""
+        ) ?? ""
+        
+        let double = (amountWithPrefix as NSString).doubleValue
+        number = NSNumber(value: (double / 1000000))
+        
+        // if first number is 0 or all numbers were deleted
+        guard number != 0 as NSNumber, let formattedString = formatter.string(from: number)  else {
+            self.text = ""
+            return
+        }
+        
+        self.text = formattedString
+    }
 }
