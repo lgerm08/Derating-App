@@ -7,12 +7,19 @@
 
 import UIKit
 
-class SwitchComponent: UIView {
+protocol SwitchComponentProtocol {
+    func switchChangedValue(switchName: String)
+}
+
+class SwitchComponent: UITableViewCell {
     
     // MARK: - Properties
     var uiSwitch: UISwitch = {
         let uiSwitch = UISwitch()
+        uiSwitch.isOn = false
         uiSwitch.onTintColor = UIColor().RGBColor(r: 50, g: 161, b: 230)
+        uiSwitch.addTarget(nil, action: #selector(switchChanged), for: UIControl.Event.valueChanged)
+        uiSwitch.isUserInteractionEnabled = true
         return uiSwitch
     }()
     
@@ -25,11 +32,11 @@ class SwitchComponent: UIView {
         return label
     }()
     
-    init(
-        label: String
-    ) {
-        super.init(frame: .zero)
-        self.label.text = label
+    var delegate: SwitchComponentProtocol?
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        self.contentView.isUserInteractionEnabled = true
         setupSubviews()
     }
     
@@ -37,8 +44,18 @@ class SwitchComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupCell(label: String, status: Bool) {
+        self.label.text = label
+        self.uiSwitch.isOn = status
+    }
+    
+    @objc func switchChanged(mySwitch: UISwitch) {
+        if let switchName = label.text {
+            delegate?.switchChangedValue(switchName: switchName)
+        }
+    }
+    
     // MARK: - Layout Configuration
-  
     
     private func setupSubviews() {
         addSubview(label)
@@ -51,8 +68,8 @@ class SwitchComponent: UIView {
         label.anchor(
             top: uiSwitch.topAnchor,
             left: uiSwitch.rightAnchor,
-            bottom: bottomAnchor,
             right: rightAnchor,
+            topConstant: 10,
             leftConstant: 10
         )
     }

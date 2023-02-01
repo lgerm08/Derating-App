@@ -22,6 +22,7 @@
 		4324720B295B618A000C80E8 /* HarmonicCurrentsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4324720A295B618A000C80E8 /* HarmonicCurrentsDataModel.swift */; };
 		4324720D295F7293000C80E8 /* DeratingResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4324720C295F7293000C80E8 /* DeratingResultViewController.swift */; };
 		4324720F295F7309000C80E8 /* DeratingResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4324720E295F7309000C80E8 /* DeratingResultViewModel.swift */; };
+		4324721529639637000C80E8 /* TransformerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4324721429639637000C80E8 /* TransformerData.swift */; };
 		4339162E28A02E5E001C496C /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339162D28A02E5E001C496C /* ButtonComponent.swift */; };
 		4339163028A04A93001C496C /* SwitchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339162F28A04A93001C496C /* SwitchComponent.swift */; };
 		433EC0CA2876481700AAB101 /* LifeSpanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433EC0C92876481700AAB101 /* LifeSpanViewController.swift */; };
@@ -32,6 +33,7 @@
 		4385C4C1294BF29000CA4CF8 /* HarmonicFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4385C4C0294BF29000CA4CF8 /* HarmonicFactorViewController.swift */; };
 		4385C4C3294BF2DA00CA4CF8 /* HarmonicFactorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4385C4C2294BF2DA00CA4CF8 /* HarmonicFactorViewModel.swift */; };
 		4385C4C5294BF52500CA4CF8 /* HarmonicCurrentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4385C4C4294BF52500CA4CF8 /* HarmonicCurrentViewCell.swift */; };
+		438A48112978E094007B86BC /* SwitchComponentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438A48102978E094007B86BC /* SwitchComponentData.swift */; };
 		439287DF28A1BC0F00FF896E /* InputDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439287DE28A1BC0F00FF896E /* InputDataViewController.swift */; };
 		439287E128A1BF2700FF896E /* InputDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439287E028A1BF2700FF896E /* InputDataViewModel.swift */; };
 		439287E328A1C02700FF896E /* AvailableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439287E228A1C02700FF896E /* AvailableData.swift */; };
@@ -78,6 +80,7 @@
 		4324720A295B618A000C80E8 /* HarmonicCurrentsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonicCurrentsDataModel.swift; sourceTree = "<group>"; };
 		4324720C295F7293000C80E8 /* DeratingResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeratingResultViewController.swift; sourceTree = "<group>"; };
 		4324720E295F7309000C80E8 /* DeratingResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeratingResultViewModel.swift; sourceTree = "<group>"; };
+		4324721429639637000C80E8 /* TransformerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerData.swift; sourceTree = "<group>"; };
 		4339162D28A02E5E001C496C /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		4339162F28A04A93001C496C /* SwitchComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchComponent.swift; sourceTree = "<group>"; };
 		433EC0C92876481700AAB101 /* LifeSpanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeSpanViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		4385C4C0294BF29000CA4CF8 /* HarmonicFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonicFactorViewController.swift; sourceTree = "<group>"; };
 		4385C4C2294BF2DA00CA4CF8 /* HarmonicFactorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonicFactorViewModel.swift; sourceTree = "<group>"; };
 		4385C4C4294BF52500CA4CF8 /* HarmonicCurrentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonicCurrentViewCell.swift; sourceTree = "<group>"; };
+		438A48102978E094007B86BC /* SwitchComponentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchComponentData.swift; sourceTree = "<group>"; };
 		439287DE28A1BC0F00FF896E /* InputDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataViewController.swift; sourceTree = "<group>"; };
 		439287E028A1BF2700FF896E /* InputDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataViewModel.swift; sourceTree = "<group>"; };
 		439287E228A1C02700FF896E /* AvailableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableData.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				4385C4C2294BF2DA00CA4CF8 /* HarmonicFactorViewModel.swift */,
 				4324720A295B618A000C80E8 /* HarmonicCurrentsDataModel.swift */,
 				4324720E295F7309000C80E8 /* DeratingResultViewModel.swift */,
+				4324721429639637000C80E8 /* TransformerData.swift */,
+				438A48102978E094007B86BC /* SwitchComponentData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				4309B5D82873A4F600E6E87A /* DeratingViewModel.swift in Sources */,
 				4309B5D62873A3D400E6E87A /* AnswerComponent.swift in Sources */,
 				431F5061289A0C3300A8A78A /* InputFactorKViewController.swift in Sources */,
+				4324721529639637000C80E8 /* TransformerData.swift in Sources */,
 				43468A8C286E646800CDC1DF /* UIView+AutoLayout.swift in Sources */,
 				4385C4C5294BF52500CA4CF8 /* HarmonicCurrentViewCell.swift in Sources */,
 				431F505D289A0C0C00A8A78A /* InputEddyCurrentViewController.swift in Sources */,
@@ -396,6 +403,7 @@
 				4339162E28A02E5E001C496C /* ButtonComponent.swift in Sources */,
 				433EC0CA2876481700AAB101 /* LifeSpanViewController.swift in Sources */,
 				43468A94286E7DF200CDC1DF /* TextFieldObject.swift in Sources */,
+				438A48112978E094007B86BC /* SwitchComponentData.swift in Sources */,
 				4309B5D428739D7C00E6E87A /* UITextField+Extension.swift in Sources */,
 				43B9FEA2286BC2A6007818D5 /* SceneDelegate.swift in Sources */,
 				43B9FEAA286BC2A6007818D5 /* Derating_App.xcdatamodeld in Sources */,

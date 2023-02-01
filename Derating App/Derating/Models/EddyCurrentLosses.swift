@@ -8,8 +8,8 @@
 import Foundation
  
 class EddyCurrentLosses {
-    var eddyCurrentLoss: Double
     
+    var eddyCurrentLoss: Double
     var isThereEnoughData = true
     
     init(

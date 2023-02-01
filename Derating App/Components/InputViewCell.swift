@@ -18,7 +18,6 @@ class InputViewCell: UITableViewCell {
         textField.backgroundColor = UIColor().RGBColor(r: 230, g: 238, b: 242)
         textField.keyboardType = .numberPad
         textField.layer.cornerRadius = 15.0
-        textField.keyboardType = .numbersAndPunctuation
         textField.isEnabled = true
         textField.isUserInteractionEnabled = true
         textField.addPadding(.both(10))

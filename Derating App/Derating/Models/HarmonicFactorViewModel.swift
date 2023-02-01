@@ -12,16 +12,24 @@ class HarmonicFactorViewModel {
     var baseCurrent: Double
     var unit: String
     var currents: [HarmonicCurrentsDataModel?] = []
-    var pj: JouleLosses
+    var pj: Double
+    var pec: Double
     
     init(
         unit: String,
         baseCurrent: Double,
-        pj: JouleLosses
+        pj: Double,
+        pec: Double
     ) {
         self.unit = unit
         self.baseCurrent = baseCurrent
         self.pj = pj
+        self.pec = pec
+        if unit == "[pu]" {
+            currents.append(HarmonicCurrentsDataModel(order: 1, value: 1))
+        } else {
+            currents.append(HarmonicCurrentsDataModel(order: 1, value: baseCurrent))
+        }
     }
     
     func hasDuplicatedOrder() -> Bool {

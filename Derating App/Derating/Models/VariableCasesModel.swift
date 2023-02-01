@@ -10,7 +10,15 @@ import Foundation
 enum JouleLossesCases {
     case RatedLoss
     case PuLoss
-    case SiLoss
-    case PuTestData
-    case SiTestData
+    case BaseInformed
+    case BaseFromPuTest
+    case BaseFromSiTest
+    case BaseFromTrafoData
+}
+
+enum ConnectionMode {
+    case YDelta
+    case DeltaY
+    case YY
+    case DeltaDelta
 }

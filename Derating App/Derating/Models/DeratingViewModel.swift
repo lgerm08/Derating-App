@@ -9,15 +9,11 @@ import Foundation
 
 class DeratingViewModel {
     
-    var maxCurrent: Float = 0
+    var maxCurrent: Double = 0
     var jouleLosses: JouleLosses?
     
-    func calculateCurrent(PJ1: Float, PEC1: Float, KFactor: Float) {
-        self.maxCurrent = Float(sqrt((PJ1+PEC1)/(1+KFactor*PEC1)))
-    }
-    
-    func getJouleLosses() -> JouleLosses {
-        return JouleLosses(puJouleLosses: nil, zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: 1.0, siJouleLosses: nil)
+    func calculateCurrent(PJ1: Double, PEC1: Double, KFactor: Double) {
+        self.maxCurrent = Double(sqrt((PJ1+PEC1)/(1+KFactor*PEC1)))
     }
     
 }

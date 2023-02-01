@@ -9,8 +9,17 @@ class AnswerComponent: UIView, UITextFieldDelegate {
         let label = UILabel()
         label.numberOfLines = 1
         label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = .black
         return label
+    }()
+    
+    private lazy var circleView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 75
+        view.layer.borderColor = UIColor().RGBColor(r: 50, g: 161, b: 230).cgColor
+        view.layer.borderWidth = 10
+        return view
     }()
     
     private lazy var resultLabel: UILabel = {
@@ -19,6 +28,7 @@ class AnswerComponent: UIView, UITextFieldDelegate {
         label.textAlignment = .center
         label.textColor = .black
         label.text = ""
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -27,16 +37,13 @@ class AnswerComponent: UIView, UITextFieldDelegate {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     init(
-        label: String,
-        unit: String
     ) {
         super.init(frame: .zero)
-        self.label.text = label
-        self.unitLabel.text = unit
         setupViewLayout()
         setupSubviews()
     }
@@ -45,10 +52,13 @@ class AnswerComponent: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Layout Configuration
-    func setResult(result: Float) {
-        resultLabel.text = String(result)
+    func setLabels(label: String, value: Double, unit: String) {
+        self.label.text = label
+        self.resultLabel.text = String(format: "%.4f", value)
+        self.unitLabel.text = unit
     }
+    
+    // MARK: - Layout Configuration
     
     private func setupViewLayout() {
         backgroundColor = .clear
@@ -56,22 +66,34 @@ class AnswerComponent: UIView, UITextFieldDelegate {
     
     private func setupSubviews() {
         addSubview(label)
-        addSubview(resultLabel)
-        addSubview(unitLabel)
+        addSubview(circleView)
+        circleView.addSubview(resultLabel)
+        circleView.addSubview(unitLabel)
         label.anchor(
+            top: topAnchor,
             left: leftAnchor,
-            leftConstant: 5,
-            widthConstant: 50
+            right: rightAnchor,
+            leftConstant: 12,
+            rightConstant: 12
+        )
+        circleView.anchor(
+            top: label.bottomAnchor,
+            centerX: label.centerXAnchor,
+            topConstant: 15,
+            widthConstant: 150,
+            heightConstant: 150
         )
         resultLabel.anchor(
-            left: label.rightAnchor,
-            leftConstant: 5
+            top: circleView.topAnchor,
+            centerX: circleView.centerXAnchor,
+            topConstant: 50,
+            widthConstant: 100
         )
         unitLabel.anchor(
-            left: resultLabel.rightAnchor,
-            right: rightAnchor,
-            leftConstant: 5,
-            rightConstant: 15
+            top: resultLabel.bottomAnchor,
+            centerX: resultLabel.centerXAnchor,
+            topConstant: 8,
+            widthConstant: 100
         )
     }
 }

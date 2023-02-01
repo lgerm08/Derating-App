@@ -32,6 +32,10 @@ class ButtonComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setDisabledColor() {
+        button.backgroundColor = UIColor().RGBColor(r: 142, g: 196, b: 230)
+    }
+    
     func addSubviews() {
         addSubview(button)
         button.anchor(

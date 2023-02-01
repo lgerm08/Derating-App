@@ -37,11 +37,15 @@ class InputDataViewController: UIViewController, UITableViewDelegate, UITableVie
     }()
     
     private var cellBeingEdited: Int = 0
+    private var powerBase: Double = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.requiredInputsForPj()
         addSubviews()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     init(
@@ -55,21 +59,31 @@ class InputDataViewController: UIViewController, UITableViewDelegate, UITableVie
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @objc func routeToNextView() {
         let pj = generatePjVarialbe()
-        if pj.isThereEnoughData {
-            if viewModel.needsHarmonicFactorScreen {
-                let harmonicVM = HarmonicFactorViewModel(unit: viewModel.currentUnit, baseCurrent: valueAtId(id: "ien") ?? 1.0, pj: pj)
-                let newViewController = HarmonicFactorViewController(viewModel: harmonicVM)
-                newViewController.modalPresentationStyle = .fullScreen
-                self.present(newViewController, animated: true, completion: nil)
-            } else {
-                let deratingVM = DeratingResultViewModel()
+        viewModel.fhl = viewModel.valueAtId(id: "fhl")
+        if viewModel.availableData.informParasiteCurrentLoss {
+            viewModel.pec = viewModel.valueAtId(id: "pec")
+        } else {
+            viewModel.pec = viewModel.availableData.twoPercentParasiteCurrentLoss ? 0.02 : 0.03
+        }
+        if pj.isThereEnoughData && viewModel.pec != nil{
+            if let fhl = viewModel.fhl {
+                let deratingVM = DeratingResultViewModel(pj: pj.getPuJouleLosses(), fhl: fhl, pec: viewModel.pec!)
                 let newViewController = DeratingResultViewController(viewModel: deratingVM)
                 newViewController.modalPresentationStyle = .fullScreen
                 self.present(newViewController, animated: true, completion: nil)
+
+            } else {
+                let harmonicVM = HarmonicFactorViewModel(unit: viewModel.currentUnit, baseCurrent: viewModel.valueAtId(id: "ien") ?? 1.0, pj: pj.getPuJouleLosses(), pec: viewModel.pec!)
+                let newViewController = HarmonicFactorViewController(viewModel: harmonicVM)
+                newViewController.modalPresentationStyle = .fullScreen
+                self.present(newViewController, animated: true, completion: nil)
             }
-            
         } else {
             let action = UIAlertAction(title: "OK", style: .default)
             let alert = UIAlertController(title: "Dados Insuficientes", message: "Não é possível calcular a perda joule [pu] sem preencher todos os campos", preferredStyle: .alert)
@@ -77,28 +91,18 @@ class InputDataViewController: UIViewController, UITableViewDelegate, UITableVie
             present(alert, animated: true, completion: nil)
         }
     }
-    
+ 
     func generatePjVarialbe() -> JouleLosses {
         switch viewModel.jouleLossStats {
         case .RatedLoss:
-            return JouleLosses(puJouleLosses: 1.0, zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: nil, siJouleLosses: nil)
+            return JouleLosses(puJouleLosses: 1.0, siJouleLosses: nil, jouleLossesBase: nil)
         case .PuLoss:
-            return JouleLosses(puJouleLosses: valueAtId(id: "pjPu"), zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: nil, siJouleLosses: nil)
-        case .SiLoss:
-            return JouleLosses(puJouleLosses: nil, zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: nil, siJouleLosses: valueAtId(id: "pjSi"))
-        case .PuTestData:
-            return JouleLosses(puJouleLosses: nil, zPercent: nil, primaryResistence: valueAtId(id: "r1Pu"), primaryCurrent: valueAtId(id: "i1Pu"), secondaryResistence: valueAtId(id: "r2Pu"), secondaryCurrent: valueAtId(id: "i2Pu"), siJouleLosses: nil)
-        case .SiTestData:
-            return JouleLosses(puJouleLosses: nil, zPercent: nil, primaryResistence: valueAtId(id: "r1Si"), primaryCurrent: valueAtId(id: "i1Si"), secondaryResistence: valueAtId(id: "r2Si"), secondaryCurrent: valueAtId(id: "i2Si"), siJouleLosses: nil)
+            return JouleLosses(puJouleLosses: viewModel.valueAtId(id: "pjPu"), siJouleLosses: nil, jouleLossesBase: nil)
+        case .BaseInformed, .BaseFromPuTest, .BaseFromSiTest, .BaseFromTrafoData:
+            return JouleLosses(puJouleLosses: nil, siJouleLosses: viewModel.valueAtId(id: "pjSi"), jouleLossesBase: viewModel.getPowerBase())
         }
     }
-    
-    func valueAtId(id: String) -> Double? {
-        for field in viewModel.fields where field.id == id {
-            return field.value
-        }
-        return nil
-    }
+   
     
     @objc func goBackToPreviousScreen(sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)

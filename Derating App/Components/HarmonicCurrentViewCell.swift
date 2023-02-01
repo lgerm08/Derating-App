@@ -69,10 +69,18 @@ class HarmonicCurrentViewCell: UITableViewCell, UITextFieldDelegate {
     
     func setTitleAndUnit(order: String?, current: String?, unit: String, index: Int, delegate: HarmonicCurrentViewCellProtocol) {
         orderTextField.text = order
-        currentTextField.placeholder = "Corrente [" + unit + "]"
+        currentTextField.placeholder = "Corrente " + unit
         currentTextField.text = current
         indexPath = index
         self.delegate = delegate
+    }
+    
+    func disableEditing() {
+        orderTextField.isUserInteractionEnabled = false
+        currentTextField.isUserInteractionEnabled = false
+        trashIcon.isHidden = true
+        orderTextField.backgroundColor = .lightGray
+        currentTextField.backgroundColor = .lightGray
     }
     
     @objc func currentValueDidChange(_ textField: UITextField) {

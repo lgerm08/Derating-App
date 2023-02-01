@@ -76,10 +76,10 @@ class HarmonicFactorViewController: UIViewController, UITableViewDelegate, UITab
         } else {
             let fhl = viewModel.calculateFhl()
             print(fhl)
-//            let deratingVM = DeratingResultViewModel()
-//            let newViewController = DeratingResultViewController(viewModel: deratingVM)
-//            newViewController.modalPresentationStyle = .fullScreen
-//            self.present(newViewController, animated: true, completion: nil)
+            let deratingVM = DeratingResultViewModel(pj: viewModel.pj, fhl: fhl, pec: viewModel.pec)
+            let newViewController = DeratingResultViewController(viewModel: deratingVM)
+            newViewController.modalPresentationStyle = .fullScreen
+            self.present(newViewController, animated: true, completion: nil)
         }
     }
     
@@ -153,6 +153,9 @@ class HarmonicFactorViewController: UIViewController, UITableViewDelegate, UITab
             cell.setTitleAndUnit(order: String(current.order), current: String(current.value), unit: viewModel.unit, index: indexPath.row, delegate: self)
         } else {
             cell.setTitleAndUnit(order: nil, current: nil, unit: viewModel.unit, index: indexPath.row, delegate: self)
+        }
+        if indexPath.row == 0 {
+            cell.disableEditing()
         }
         return cell
     }

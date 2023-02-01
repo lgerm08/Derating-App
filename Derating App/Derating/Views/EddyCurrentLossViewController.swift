@@ -10,7 +10,8 @@ import UIKit
 class EddyCurrentLossViewController: UIViewController {
     
     let viewModel = DeratingViewModel()
-    var jouleLosses = JouleLosses(puJouleLosses: nil, zPercent: nil, primaryResistence: nil, primaryCurrent: nil, secondaryResistence: nil, secondaryCurrent: 1.0, siJouleLosses: nil)
+    var jouleLosses: JouleLosses
+    var fhl: Double?
     
     private lazy var navbar: NavigationBar = {
         let navBar = NavigationBar(title: "Perdas por Correntes Parasitas")
@@ -41,6 +42,19 @@ class EddyCurrentLossViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
+    }
+    
+    init(
+        jouleLosses: JouleLosses,
+        fhl: Double?
+    ) {
+        self.jouleLosses = jouleLosses
+        self.fhl = fhl
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func eddyCurrentLossesInformed() {
