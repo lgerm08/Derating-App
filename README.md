@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Swift-based project is the culmination of my college studies in Electrical Engineering, presented as the conclusion work to obtain my diploma. The project focuses on developing a specialized calculator for power transformers. The calculator receives essential information such as rated data, load current, and harmonic currents, aiming to determine the ideal operating current in per unit (pu) to preserve the transformer's lifespan.
+This Swift-based project is the culmination of my college studies in Electrical Engineering at Universidade Federal de Uberlândoa (UFU), presented as the conclusion work to obtain my diploma. The project focuses on developing a specialized calculator for power transformers. The calculator receives essential information such as rated data, load current, and harmonic currents, aiming to determine the ideal operating current in per unit (pu) to preserve the transformer's lifespan.
 
 ## Features
 
@@ -24,6 +24,6 @@ This project is presented as part of the academic work for the conclusion of my 
 
 ## Acknowledgments
 
-I would like to express my gratitude to my academic advisor, Prof. Carlos Eduardo Tavares and my mentors for their guidance and support throughout the development of this project. Additionally, appreciation is extended to the academic community for fostering an environment of learning and innovation.
+I would like to express my gratitude to my academic advisor, Prof. Carlos Eduardo Tavares and my mentors for their guidance and support throughout the development of this project. Additionally, appreciation is extended to UFU academic community for fostering an environment of learning and innovation.
 
 Thank you for being a part of my academic journey with the Power Transformer Calculator project! ⚡🔧
